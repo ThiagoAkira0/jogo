@@ -1,0 +1,261 @@
+:root {
+    --primary: #ff3e3e;
+    --secondary: #00f2ff;
+    --bg: #0a0a0c;
+    --glass: rgba(20, 20, 25, 0.7);
+    --border: rgba(255, 255, 255, 0.1);
+    --font: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg);
+    color: white;
+    font-family: var(--font);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    background: #000;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    /* Keeping it crisp for fighting games */
+}
+
+/* HUD Styling */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.stat-box {
+    width: 400px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 10px;
+}
+
+.name {
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.level-badge,
+.scaling-badge {
+    background: var(--secondary);
+    color: #000;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.scaling-badge {
+    background: var(--primary);
+}
+
+.health-bar-bg {
+    height: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.health-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #ff7b7b);
+    width: 100%;
+    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.xp-bar-bg {
+    height: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: var(--secondary);
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* Toast Notification */
+.toast {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--secondary);
+    padding: 15px 30px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideDown 0.5s forwards;
+    opacity: 0;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.toast.hidden {
+    display: none;
+}
+
+.toast .icon {
+    font-size: 24px;
+}
+
+.toast .title {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--secondary);
+}
+
+.toast .subtitle {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Control Hints */
+#controls-hint {
+    display: flex;
+    gap: 20px;
+    background: var(--glass);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    width: fit-content;
+}
+
+.key-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.key {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.label {
+    font-size: 10px;
+    font-weight: 700;
+    opacity: 0.5;
+    letter-spacing: 1px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.content {
+    text-align: center;
+}
+
+h1 {
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    opacity: 0.7;
+}
+
+button {
+    background: var(--primary);
+    border: none;
+    padding: 15px 40px;
+    color: white;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}

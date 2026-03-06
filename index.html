@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Strike | 2D Fighting Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- HUD Overlay -->
+        <div id="hud">
+            <div class="stats-container">
+                <div class="stat-box player-stats">
+                    <div class="label-row">
+                        <span class="name">SHADOW</span>
+                        <span class="level-badge">LVL <span id="player-level">1</span></span>
+                    </div>
+                    <div class="health-bar-bg">
+                        <div id="player-health" class="health-bar-fill"></div>
+                    </div>
+                    <div class="xp-bar-bg">
+                        <div id="player-xp" class="xp-bar-fill"></div>
+                    </div>
+                </div>
+
+                <div class="stat-box enemy-stats" id="enemy-hud">
+                    <div class="label-row">
+                        <span class="name">STRIKER</span>
+                        <span class="scaling-badge">PREMIUM</span>
+                    </div>
+                    <div class="health-bar-bg">
+                        <div id="enemy-health" class="health-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="move-unlock-toast" class="toast hidden">
+                <span class="icon">🔥</span>
+                <div class="text">
+                    <div class="title">MOVE UNLOCKED!</div>
+                    <div id="unlocked-move-name" class="subtitle">UPPERCUT</div>
+                </div>
+            </div>
+
+            <div id="controls-hint">
+                <div class="key-group">
+                    <span class="key">A</span>
+                    <span class="key">D</span>
+                    <span class="label">MOVE</span>
+                </div>
+                <div class="key-group">
+                    <span class="key">SPACE</span>
+                    <span class="label">JUMP</span>
+                </div>
+                <div class="key-group">
+                    <span class="key">SHIFT</span>
+                    <span class="label">BLOCK</span>
+                </div>
+                <div class="key-group">
+                    <span class="key">J</span>
+                    <span class="label">JAB</span>
+                </div>
+                <div class="key-group">
+                    <span class="key">K</span>
+                    <span class="label">KICK</span>
+                </div>
+                <div class="key-group hidden" id="hint-L">
+                    <span class="key">L</span>
+                    <span class="label" id="label-L">SPECIAL</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-over" class="overlay hidden">
+            <div class="content">
+                <h1>DEFEATED</h1>
+                <p>Kills: <span id="final-kills">0</span></p>
+                <button onclick="location.reload()">RETRY</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
